@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.flowable.mapper.BpmToolTableBpmnInfoMapper">
+
+    <select id="selectBpmToolTableByBpmId" parameterType="String" resultType="org.jeecg.modules.flowable.entity.BpmToolTableBpmn">
+        select id,bpm_id,bpm_key,deploy_id, table_cate, online_table_id, online_table_code,online_table_bpm,desform_table_id, desform_table_code, desform_table_bpm, work_title,publish_state
+        from bpm_tool_table_bpmn where bpm_id = #{bpmKey}
+    </select>
+
+</mapper>

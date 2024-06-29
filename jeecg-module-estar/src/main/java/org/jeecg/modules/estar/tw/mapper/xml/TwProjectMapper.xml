@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.estar.tw.mapper.TwProjectMapper">
+
+    <select id="selectProjectIdsByMemberAndOrg" resultType="java.lang.String">
+		select pp.id from tw_project as pp join tw_project_member as pm on pm.project_id = pp.id
+		where pp.organization_id = #{params.orgId} and (pm.user_id = #{params.memberId}) and
+		pp.deleted = 0 group by pp.`id`
+	</select>
+
+	<select id="selectTaskLogByProjectId" resultType="java.util.Map" parameterType="java.util.Map">
+		select tl.remark as remark,tl.content as content,tl.is_comment as is_comment,
+		tl.create_time as create_time,p.name as project_name,t.name as task_name,
+		t.id as source_id,p.id as project_id,m.avatar as member_avatar,
+		m.name as member_name from tw_project_log as tl join tw_task as t
+		on tl.source_id = t.id join tw_project as p on t.project_id = p.id
+		join sys_user as m on tl.member_id = m.username
+		where tl.action_type = 'task' and p.id in
+		<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+		and p.deleted = 0
+
+		order by tl.id desc
+
+	</select>
+</mapper>

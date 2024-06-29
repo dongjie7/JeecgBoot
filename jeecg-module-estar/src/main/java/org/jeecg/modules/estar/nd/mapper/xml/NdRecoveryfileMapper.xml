@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.estar.nd.mapper.NdRecoveryfileMapper">
+  <select id="selectRecoveryFileList" resultType="org.jeecg.modules.estar.nd.vo.RecoveryFileListVo">
+        SELECT a.id as recoveryFileId,a.deleteBatchNum,a.deletetime,a.userfileid,b.create_time as uploadTime,
+               b.create_by as userId,b.extendname,b.deleteflag,b.deletetime,b.fileid,b.filename,b.filepath,
+               b.isdir FROM nd_recoveryfile a
+        LEFT JOIN nd_userfile b ON a.userFileId = b.id
+        left join nd_file c on c.id = b.fileId
+        WHERE b.create_by = #{userId}
+    </select>
+</mapper>

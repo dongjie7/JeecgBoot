@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.flowable.mapper.SysDeployFormMapper">
+    <select id="selectSysDeployFormById" parameterType="String" resultType="org.jeecg.modules.flowable.entity.SysDeployForm">
+        select * from sys_deploy_form
+        where id = #{id}
+    </select>
+    
+    <select id="selectSysDeployFormByFormId" parameterType="String" resultType="org.jeecg.modules.flowable.entity.SysDeployForm">
+        select * from sys_deploy_form
+        where form_id = #{formId}
+    </select>
+    
+    <select id="selectSysDeployFormByDeployId" resultType="org.jeecg.modules.flowable.entity.SysForm">
+        select t1.form_content as formContent,t1.form_name as formName,t1.id as id from sys_form t1 left join sys_deploy_form t2 on t1.id = t2.form_id
+        where (t2.deploy_id = #{deployId} and t2.form_flag='1') limit 1  <!-- oracle 用and rownum = 1 mysql用limit 1-->
+    </select>
+    
+    <select id="selectSysCustomFormByDeployId" resultType="org.jeecg.modules.flowable.entity.SysCustomForm">
+        select t1.business_service as businessService,t1.route_name as routeName,t1.business_name as businessName,t1.id as id from sys_custom_form t1 left join sys_deploy_form t2 on t1.id = t2.form_id
+        where t2.deploy_id = #{deployId} limit 1  <!-- oracle 用and rownum = 1 mysql用limit 1-->
+    </select>
+    
+    <select id="selectCurSysDeployForm" parameterType="Object" resultType="org.jeecg.modules.flowable.entity.SysForm">
+        select t1.form_content as formContent,t1.form_name as formName,t1.id as id from sys_form t1 left join sys_deploy_form t2 on t1.id = t2.form_id
+        where t2.form_id = #{formId} and t2.deploy_id = #{deployId} and t2.node_key = #{nodeKey} limit 1  <!-- oracle 用and rownum = 1 mysql用limit 1-->
+    </select>
+</mapper>

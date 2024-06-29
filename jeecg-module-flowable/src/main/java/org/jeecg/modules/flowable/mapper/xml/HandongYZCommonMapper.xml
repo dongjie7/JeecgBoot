@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.flowable.mapper.HandongYZCommonMapper">
+
+    <select id="allSysDictItemInfo" resultType="org.jeecg.modules.flowable.entity.SysDictItem">
+        select sys_dict_item.id as id,sys_dict_item.dict_id as dict_id,sys_dict_item.item_text as item_text,sys_dict_item.item_value as item_value,sys_dict_item.description as description,sys_dict_item.sort_order as sort_order, sys_dict_item.status  as status from sys_dict_item right join sys_dict on sys_dict_item.dict_id = sys_dict.id where sys_dict.dict_code = #{dictCode} and sys_dict_item.status =1 order by sys_dict_item.sort_order asc
+    </select>
+
+
+    <select id="customDictData" resultType="org.jeecg.modules.flowable.apithird.entity.SysCategory">
+        select ${dictField} as id,${dictText} as name from ${dictTable}
+    </select>
+
+    <select id="backfieldDataCateDictCode" resultType="org.jeecg.modules.flowable.entity.vo.SysCateDictCode">
+        select id,name as label from sys_category where pid = #{parentId}
+    </select>
+
+    <select id="backfieldDataCateDictCodeTwo" resultType="org.jeecg.modules.flowable.entity.vo.SysCateDictCode">
+        select id,name as label from sys_category where pid = (select id from sys_category where  code= #{parentCode})
+    </select>
+
+    <select id="backfieldSelTreeDataCateDictCode" resultType="org.jeecg.modules.flowable.entity.vo.SysCateDictCode">
+        select ${dataId} as id,${dictText} as label from ${dictTable}
+        <where>
+            <if test="dictField != null and dictField != ''">
+                ${dataParentId} = #{dictField}
+            </if>
+        </where>
+    </select>
+
+    <select id="backfieldSelTreeDataCateDictCodeLinkDown" resultType="org.jeecg.modules.flowable.entity.vo.LinkDownCateCode">
+        select ${dataId} as id,${dictText} as `name` from ${dictTable}
+        <where>
+            <if test="dictField != null and dictField != ''">
+                ${dataParentId} = #{dictField}
+            </if>
+        </where>
+    </select>
+</mapper>

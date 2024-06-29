@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.estar.nd.mapper.NdUserfileMapper">
+  <select id="selectPageVo" parameterType="org.jeecg.modules.estar.nd.entity.NdUserfile" resultType="org.jeecg.modules.estar.nd.vo.FileListVO">
+        select a.id as userFileId,a.fileid ,a.filename,a.extendname,a.filepath,a.isdir,a.deleteflag,a.deletetime,
+        a.create_time as uploadTime,a.create_by as userId,a.deletebatchnum,b.filesize,b.fileurl,b.filestatus,
+        b.identifier,b.storagetype,c.imageheight,c.imagewidth  from nd_userfile a
+        left join nd_image c  on a.fileId = c.fileId
+        left join nd_file b  on b.Id = a.fileId
+        <where>
+            <if test="fileTypeId != null">
+                <choose>
+                    <when test="fileTypeId != 5">
+                        extendName in (select fileExtendName from nd_fileclassification where fileTypeId = #{fileTypeId})
+                    </when>
+                    <otherwise>
+                        extendName not in (select fileExtendName from nd_fileclassification where fileTypeId in (1, 2, 3, 4))
+                    </otherwise>
+                </choose>
+                and a.isDir = 0
+            </if>
+            <if test="userFile.createBy != null">
+                and a.create_by = #{userFile.createBy}
+            </if>
+            <if test="userFile.filepath != null">
+                and a.filepath = #{userFile.filepath}
+            </if>
+            <if test="userFile.extendname != null">
+                and a.extendname = #{userFile.extendname}
+            </if>
+            <if test="userFile.id != null">
+                and a.id = #{userFile.id}
+            </if>
+            <if test="userFile.filename != null">
+                and a.filename = #{userFile.filename}
+            </if>
+            and a.deleteFlag = 0
+        </where>
+        ORDER BY isDir desc
+    </select>
+    
+    
+    <select id="selectPageVoByName" parameterType="org.jeecg.modules.estar.nd.entity.NdUserfile" resultType="org.jeecg.modules.estar.nd.vo.FileListVO">
+        select a.id as userFileId,a.fileid ,a.filename,a.extendname,a.filepath,a.isdir,a.deleteflag,a.deletetime,
+        a.create_time as uploadTime,a.create_by as userId,a.deletebatchnum,b.filesize,b.fileurl,b.filestatus,
+        b.identifier,b.storagetype,c.imageheight,c.imagewidth  from nd_userfile a
+        left join nd_image c  on a.fileId = c.fileId
+        left join nd_file b  on b.Id = a.fileId
+        <where>
+            <if test="userFile.createBy != null">
+                and a.create_by = #{userFile.createBy}
+            </if>
+            <if test="userFile.filepath != null">
+                and a.filepath like #{userFile.filepath}
+            </if>
+            <if test="userFile.extendname != null">
+                and a.extendname = #{userFile.extendname}
+            </if>
+            <if test="userFile.id != null">
+                and a.id = #{userFile.id}
+            </if>
+            <if test="userFile.filename != null">
+                and a.filename like #{userFile.filename}
+            </if>
+            and a.isDir = 0 and a.deleteFlag = 0
+        </where>
+        ORDER BY isDir desc
+    </select>
+    
+    <select id="selectUserFileByLikeRightFilePath" resultType="org.jeecg.modules.estar.nd.entity.NdUserfile">
+        select * from nd_userfile
+        where (filepath = #{filePath} or filepath like concat(#{filePath},'/%')) and create_by = #{userId} and deleteFlag = 0
+    </select>
+    
+    <select id="selectStorageSizeByUserId" resultType="java.lang.Long" parameterType="java.lang.String">
+        SELECT SUM(fileSize) FROM nd_userfile
+        LEFT JOIN nd_file on nd_file.Id = nd_userfile.fileId
+        WHERE nd_userfile.create_by = #{userId}
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.erp.purchase.mapper.ErpInSheetDtoMapper">
+
+  <resultMap id="ErpInSheetDtoMap" type="org.jeecg.modules.erp.purchase.dto.ErpInSheetDto">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="sc_id" property="scId"/>
+        <result column="supplier_id" property="supplierId"/>
+        <result column="purchaser_id" property="purchaserId"/>
+        <result column="payment_date" property="paymentDate"/>
+        <result column="in_date" property="inDate"/>
+        <result column="purchase_order_id" property="purchaseOrderId"/>
+        <result column="total_num" property="totalNum"/>
+        <result column="total_gift_num" property="totalGiftNum"/>
+        <result column="total_amount" property="totalAmount"/>
+        <result column="description" property="description"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="approve_by" property="approveBy"/>
+        <result column="approve_time" property="approveTime"/>
+        <result column="status" property="status"/>
+        <result column="refuse_reason" property="refuseReason"/>
+        <result column="settle_status" property="settleStatus"/>
+        <result column="ws_code" property="wsCode"/>
+        <result column="ws_name" property="wsName"/>
+        <result column="sl_code" property="slCode"/>
+        <result column="sl_name" property="slName"/>
+        <result column="purchaser_name" property="purchaserName"/>
+        
+    </resultMap>
+    <sql id="ErpInSheetDto_sql">
+        SELECT
+            a.id,
+            a.code,
+            a.sc_id,
+			a.supplier_id,
+			a.purchaser_id,
+			a.payment_date,
+            a.in_date,
+			a.purchase_order_id,
+			a.total_num,
+			a.total_gift_num,
+			a.total_amount,
+			a.description,
+			a.create_by,
+			a.create_time,
+			a.approve_by,
+			a.approve_time,
+			a.status,
+			a.refuse_reason,
+			a.settle_status,
+			ws.code as ws_code,
+            ws.name as ws_name,
+			sl.code as sl_code,
+			sl.name as sl_name,
+			u.realname purchaser_name
+        FROM erp_in_sheet AS a
+        LEFT JOIN erp_warehouse AS ws ON ws.id = a.sc_id
+        LEFT JOIN erp_supplier AS sl ON sl.id = a.supplier_id
+        LEFT JOIN sys_user AS u ON u.username = a.purchaser_id
+    </sql>
+    <select id="queryInSheetList" resultMap="ErpInSheetDtoMap">
+        <include refid="ErpInSheetDto_sql"/>
+        <where>
+           <if test="vo != null">
+	            <if test="vo.scId != null and vo.scId != ''">
+	                AND a.sc_id = #{vo.scId}
+	            </if>
+	            <if test="vo.supplierId != null and vo.supplierId != ''">
+	                AND (a.supplier_id = #{vo.supplierId} 
+	            </if>
+            </if>
+        </where>
+        ORDER BY a.code
+    </select>
+    
+</mapper>

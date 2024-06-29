@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.erp.goods.mapper.ErpGoodsDtoMapper">
+  <resultMap id="ErpGoodsDtoMap" type="org.jeecg.modules.erp.goods.dto.ErpGoodsDto">
+        <id column="id" property="id"/>
+        <result column="code" property="code"/>
+        <result column="name" property="name"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="brand_id" property="brandId"/>
+        <result column="brand_name" property="brandName"/>
+        <result column="spec" property="spec"/>
+        <result column="unit" property="unit"/>
+        <result column="status" property="status"/>
+        <result column="purchase_price" property="purchasePrice"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="retail_price" property="retailPrice"/>
+        <result column="tax_rate" property="taxRate"/>
+        <result column="sale_tax_rate" property="saleTaxRate"/>
+        <result column="num" property="num"/>
+        <result column="total_price" property="totalPrice"/>
+    </resultMap>
+    <sql id="ErpGoodsDto_sql">
+        SELECT
+            a.id,
+            a.code,
+            a.name,
+            c.id AS category_id,
+            c.name AS category_name,
+            b.id AS brand_id,
+            b.name AS brand_name,
+            a.spec,
+            a.unit,
+            a.status,
+            price.purchase AS purchase_price,
+            price.sale AS sale_price,
+            price.retail AS retail_price,
+			a.tax_rate,
+			a.sale_tax_rate,
+			1 as num,
+			price.sale*1 as total_price
+        FROM erp_goods AS a
+        LEFT JOIN erp_goods_price AS price ON price.id = a.id
+        LEFT JOIN erp_goods_category AS c ON c.id = a.category_id
+        LEFT JOIN erp_goods_brand AS b ON b.id = a.brand_id
+    </sql>
+    <select id="queryGoodsList" resultMap="ErpGoodsDtoMap">
+        <include refid="ErpGoodsDto_sql"/>
+        <where>
+           <if test="vo != null">
+	            <if test="vo.condition != null and vo.condition != ''">
+	                AND (
+	                a.id LIKE CONCAT('%', #{vo.condition}, '%')
+	                OR a.code LIKE CONCAT('%', #{vo.condition}, '%')
+	                OR a.name LIKE CONCAT('%', #{vo.condition}, '%')
+	                )
+	            </if>
+	            <if test="vo.brandId != null and vo.brandId != ''">
+	                AND b.id = #{vo.brandId}
+	            </if>
+	            <if test="vo.categoryId != null and vo.categoryId != ''">
+	                AND (c.id = #{vo.categoryId} 
+	            </if>
+            </if>
+            AND a.status = '1' 
+        </where>
+        ORDER BY a.code
+    </select>
+    
+    <select id="getByIds" resultType="org.jeecg.modules.erp.goods.dto.ErpGoodsDto">
+    <include refid="ErpGoodsDto_sql"/>
+    <where>
+          a.id IN (
+          <foreach collection="idArray" item="id" separator=",">
+            #{id}
+          </foreach>
+          )
+     </where>
+      order by a.code desc
+    </select>	 
+    
+</mapper>

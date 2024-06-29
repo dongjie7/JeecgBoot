@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.estar.nd.mapper.NdShareMapper">
+  <select id="selectShareList" resultType="org.jeecg.modules.estar.nd.vo.ShareListVO">
+        SELECT a.id shareId,c.create_by as userId,a.create_time as shareTime,a.endtime,a.extractioncode,
+               a.sharetype,a.sharestatus,b.id as shareFileId,b.sharefilepath,b.userfileid,b.sharebatchnum,
+               c.fileid,c.filename,c.filepath,c.extendname,c.isdir,c.create_time as uploadTime,
+               c.deleteflag,c.deletetime,c.deletebatchnum,d.fileurl,d.filesize,d.storagetype FROM nd_share a
+        LEFT JOIN nd_sharefile b ON b.shareBatchNum = a.shareBatchNum
+        LEFT JOIN nd_userfile c ON c.id = b.userFileId
+        LEFT JOIN nd_file d ON d.id = c.fileId
+        WHERE sharefilepath = #{shareFilePath}
+        <if test="shareBatchNum != null">
+            AND a.sharebatchnum = #{shareBatchNum}
+        </if>
+        AND c.create_by = #{userId}
+        order BY shareTime desc
+        limit #{beginCount}, #{pageCount}
+    </select>
+</mapper>

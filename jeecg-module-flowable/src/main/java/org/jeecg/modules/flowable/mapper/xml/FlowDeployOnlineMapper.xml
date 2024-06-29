@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.flowable.mapper.FlowDeployOnlineMapper">
+    <select id="selectFlowDeployOnlineByDeployId" resultType="org.jeecg.modules.flowable.entity.FlowDeployOnline">
+        select t2.online_id as id, t1.table_name as table_name from onl_cgform_head t1 left join flow_deploy_online t2 on t1.id= t2.online_id 
+        where deploy_id = #{deployId} limit 1  <!-- oracle 用and rownum = 1 mysql用limit 1-->
+    </select>
+    
+    <select id="selectFlowDeployOnlineByOnlineIdDeployId" resultType="org.jeecg.modules.flowable.entity.FlowDeployOnline">
+        select id, online_id,deploy_id,table_name from flow_deploy_online 
+        where online_id = #{onlineId} and deploy_id=#{deployId} limit 1  <!-- oracle 用and rownum = 1 mysql用limit 1-->
+    </select>
+</mapper>

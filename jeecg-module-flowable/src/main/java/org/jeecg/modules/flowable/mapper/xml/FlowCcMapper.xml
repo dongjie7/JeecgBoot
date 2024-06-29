@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.jeecg.modules.flowable.mapper.FlowCcMapper">
+<update id="updateState" parameterType="org.jeecg.modules.flowable.entity.FlowCc">
+        update flow_cc
+        set state = '已读'
+            WHERE id=#{id}
+    </update>
+</mapper>
