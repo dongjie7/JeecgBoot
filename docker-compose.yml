@@ -2,7 +2,7 @@ version: '2'
 services:
   jeecg-boot-mysql:
     build:
-      context: ./db
+      context: ./jeecg-boot/db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_ROOT_HOST: '%'
@@ -34,7 +34,7 @@ services:
 
   jeecg-boot-system:
     build:
-      context: ./jeecg-module-system/jeecg-system-start
+      context: ./jeecg-boot/jeecg-module-system/jeecg-system-start
     restart: on-failure
     depends_on:
       - jeecg-boot-mysql
@@ -46,6 +46,17 @@ services:
       - 8080:8080
     networks:
       - jeecg-boot
+  jeecg-vue:
+    build:
+      context: ./jeecgboot-vue3
+    container_name: jeecgboot-vue3-nginx
+    image: jeecgboot-vue3
+    depends_on:
+      - jeecg-boot-system
+    networks:
+      - jeecg-boot
+    ports:
+      - 80:80
 
 networks:
   jeecg-boot:
