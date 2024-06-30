@@ -10,6 +10,7 @@ import org.jeecg.modules.system.entity.SysUser;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
 import org.jeecg.modules.system.vo.SysUserDepVo;
+import org.jeecg.modules.system.vo.SysUserNameVo;
 
 import java.util.List;
 
@@ -222,4 +223,28 @@ public interface SysUserMapper extends BaseMapper<SysUser> {
 	 */
 	@Select("select id,phone from sys_user where phone = #{phone} and username = #{username}")
     SysUser getUserByNameAndPhone(@Param("phone") String phone, @Param("username") String username);
+
+	/**
+	 *  根据部门Ids,查询部门下用户信息
+	 * @param page   add by nbacheng for IM 没有username参数
+	 * @param departIds
+	 * @return
+	 */
+	IPage<SysUser> getUsersByDepIds(Page page, @Param("departIds") List<String> departIds);
+
+	/**
+	 *  根据多个用户userNames,查询用户的实名realname
+	 *  // add by nbacheng
+	 * @param userNames
+	 * @return
+	 */
+	List<SysUserNameVo> getRealNameByNames(@Param("userNames")List<String> userNames);
+
+	/**
+	 * // add by nbacheng
+	 * @param userName
+	 * @return
+	 */
+	SysUserNameVo getRealNameByName(@Param("userName")String userName);
+
 }

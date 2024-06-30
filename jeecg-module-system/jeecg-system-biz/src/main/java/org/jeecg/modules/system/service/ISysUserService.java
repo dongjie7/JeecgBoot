@@ -1,6 +1,7 @@
 package org.jeecg.modules.system.service;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alipay.api.domain.AlipayOpenPublicAccountCreateModel;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -12,6 +13,7 @@ import org.jeecg.common.system.vo.SysUserCacheInfo;
 import org.jeecg.modules.system.entity.SysRoleIndex;
 import org.jeecg.modules.system.entity.SysUser;
 import org.jeecg.modules.system.model.SysUserSysDepartModel;
+import org.jeecg.modules.system.vo.SysUserNameVo;
 import org.jeecg.modules.system.vo.lowapp.DepartAndUserInfo;
 import org.jeecg.modules.system.vo.lowapp.UpdateDepartInfo;
 import org.springframework.transaction.annotation.Transactional;
@@ -442,4 +444,8 @@ public interface ISysUserService extends IService<SysUser> {
 	 * @param ipAddress ip地址
 	 */
 	void sendChangePhoneSms(JSONObject jsonObject, String username, String ipAddress);
+
+    IPage<SysUser> getUsersByDepIds(Page<SysUser> page, List<String> subDepids);
+
+	SysUserNameVo getRealNameByName(String string);
 }

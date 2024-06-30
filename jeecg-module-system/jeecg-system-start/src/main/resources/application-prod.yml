@@ -310,3 +310,88 @@ justauth:
     type: default
     prefix: 'demo::'
     timeout: 1h
+
+#第三方APP对接
+third-app:
+  enabled: true
+  type:
+    #企业微信
+    WECHAT_ENTERPRISE:
+      enabled: false
+      #CORP_ID
+      client-id: ??
+      #SECRET
+      client-secret: ??
+      #自建应用id
+      agent-id: ??
+      #自建应用秘钥（新版企微需要配置）
+      # agent-app-secret: ??
+    #钉钉
+    DINGTALK:
+      enabled: true
+      # appKey
+      client-id: dingrclmpcbhnquxtpsi
+      # appSecret
+      client-secret: UT9T-zTD82wqMZc_IJl5qoSUaijoy1_YvN1MKU_7a-_cf9SEbB9erZpZ8wq9HKrl
+      agent-id: 1105646298
+flowable:
+  process:
+    definition-cache-limit: -1
+  database-schema-update: true
+  activity-font-name: 宋体
+  label-font-name: 宋体
+  annotation-font-name: 宋体
+  #关闭定时任务JOB
+  async-executor-activate: false
+  #消息链接基地址
+  message-base-url: http://localhost:9888/flowable/task/record/index
+bigscreen:
+  downloadPath: http://192.168.199.152:9010/nbcio/bs
+  file:
+    #导入导出临时文件夹 默认.代表当前目录，拼接/tmp_zip/目录
+    tmpPath: .
+nbcio: #网盘
+  bucketName: ${jeecg.minio.bucketName}
+  storageType: ${jeecg.uploadType}
+  localStoragePath: ${jeecg.path.upload}
+  aliyun:
+    endpoint: ${jeecg.oss.endpoint}
+    accessKeyId: ${jeecg.oss.accessKey}
+    accessKeySecret: ${jeecg.oss.secretKey}
+    bucketName: ${jeecg.oss.bucketName}
+    objectName:
+  thumbImage:
+    width: 150
+    height: 150
+  minio:
+    endpoint: ${jeecg.minio.minio_url}
+    accessKey: ${jeecg.minio.minio_name}
+    secretKey: ${jeecg.minio.minio_pass}
+    bucketName: netdisk
+  # 当前部署外网IP，用于office预览
+  deployment:
+    host: 192.168.2.118
+  files: #onlyoffice配置参数
+    filesize-max: 5242880
+    storage: 192.168.2.118
+    folder: documents
+    docservice:
+      fillforms-docs: .oform|.docx
+      viewed-docs: .pdf|.djvu|.xps|.oxps
+      edited-docs: .docx|.xlsx|.csv|.pptx|.txt|.docxf
+      convert-docs: .docm|.dotx|.dotm|.dot|.doc|.odt|.fodt|.ott|.xlsm|.xlsb|.xltx|.xltm|.xlt|.xls|.ods|.fods|.ots|.pptm|.ppt|.ppsx|.ppsm|.pps|.potx|.potm|.pot|.odp|.fodp|.otp|.rtf|.mht|.html|.htm|.xml|.epub|.fb2
+      timeout: 120000
+      history.postfix: -hist
+      url:
+        site: http://192.168.2.118:9831/ #onlyoffice端口号
+        converter: ConvertService.ashx
+        command: coauthoring/CommandService.ashx
+        api: web-apps/apps/api/documents/api.js
+        preloader: web-apps/apps/api/documents/cache-scripts.html
+        example:
+      secret: secret
+      header: Authorization
+      verify-peer-off: true
+      languages: en:English|hy:Armenian|az:Azerbaijani|eu:Basque|be:Belarusian|bg:Bulgarian|ca:Catalan|zh:Chinese (People's Republic of China)|zh-TW:Chinese (Traditional, Taiwan)|cs:Czech|da:Danish|nl:Dutch|fi:Finnish|fr:French|gl:Galego|de:German|el:Greek|hu:Hungarian|id:Indonesian|it:Italian|ja:Japanese|ko:Korean|lv:Latvian|lo:Lao|ms:Malay (Malaysia)|nb:Norwegian|pl:Polish|pt:Portuguese (Brazil)|pt-PT:Portuguese (Portugal)|ro:Romanian|ru:Russian|sk:Slovak|sl:Slovenian|es:Spanish|sv:Swedish|tr:Turkish|uk:Ukrainian|vi:Vietnamese
+
+

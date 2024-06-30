@@ -43,6 +43,34 @@
 			<groupId>org.jeecgframework.jimureport</groupId>
 			<artifactId>jimureport-nosql-starter</artifactId>
 		</dependency>-->
+
+
+		<!-- estar 模块【微服务启动请注释掉】 add by nbacheng -->
+		<dependency>
+			<groupId>org.jeecgframework.boot</groupId>
+			<artifactId>jeecg-module-estar</artifactId>
+			<version>${jeecgboot.version}</version>
+		</dependency>
+
+		<!-- im 聊天 模块【微服务启动请注释掉】 add by nbacheng -->
+		<dependency>
+			<groupId>org.jeecgframework.boot</groupId>
+			<artifactId>jeecg-module-im</artifactId>
+			<version>${jeecgboot.version}</version>
+		</dependency>
+
+		<!-- ERP 模块【微服务启动请注释掉】 add by nbacheng -->
+		<dependency>
+			<groupId>org.jeecgframework.boot</groupId>
+			<artifactId>jeecg-module-erp</artifactId>
+			<version>${jeecgboot.version}</version>
+		</dependency>
+		<!-- flowable 模块【微服务启动请注释掉】 add by nbacheng -->
+		<dependency>
+			<groupId>org.jeecgframework.boot</groupId>
+			<artifactId>jeecg-module-flowable</artifactId>
+			<version>${jeecgboot.version}</version>
+		</dependency>
 	</dependencies>
 	
 </project>

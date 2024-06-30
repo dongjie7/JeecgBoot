@@ -71,8 +71,8 @@ public class Swagger2Config implements WebMvcConfigurer {
                 .paths(PathSelectors.any())
                 .build()
                 .securitySchemes(Collections.singletonList(securityScheme()))
-                .securityContexts(securityContexts())
-                .globalOperationParameters(setHeaderToken());
+                .securityContexts(securityContexts());
+                //.globalOperationParameters(setHeaderToken());
     }
 
     /***

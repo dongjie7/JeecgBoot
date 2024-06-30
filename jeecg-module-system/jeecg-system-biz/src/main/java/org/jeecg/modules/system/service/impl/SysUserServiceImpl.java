@@ -42,6 +42,7 @@ import org.jeecg.modules.system.service.ISysRoleIndexService;
 import org.jeecg.modules.system.service.ISysThirdAccountService;
 import org.jeecg.modules.system.service.ISysUserService;
 import org.jeecg.modules.system.vo.SysUserDepVo;
+import org.jeecg.modules.system.vo.SysUserNameVo;
 import org.jeecg.modules.system.vo.SysUserPositionVo;
 import org.jeecg.modules.system.vo.UserAvatar;
 import org.jeecg.modules.system.vo.lowapp.AppExportUserVo;
@@ -1987,6 +1988,19 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 		}
 		//step4 发送短信验证码
 		this.sendPhoneSms(phone, ipAddress);
+	}
+
+	@Override
+	public IPage<SysUser> getUsersByDepIds(Page<SysUser> page, List<String> departIds) {
+		return userMapper.getUsersByDepIds(page, departIds);
+	}
+
+	@Override
+	public SysUserNameVo getRealNameByName(String userName) {
+		// TODO Auto-generated method stub
+		SysUserNameVo sysUserNameVo = userMapper.getRealNameByName(userName);
+
+		return sysUserNameVo;
 	}
 
 	/**

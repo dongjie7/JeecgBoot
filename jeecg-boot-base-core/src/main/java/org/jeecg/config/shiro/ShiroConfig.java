@@ -163,6 +163,14 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/newsWebsocket/**", "anon");//CMS模块
         filterChainDefinitionMap.put("/vxeSocket/**", "anon");//JVxeTable无痕刷新示例
 
+        //im排除
+        filterChainDefinitionMap.put("/oauth/**", "anon");//认证
+        filterChainDefinitionMap.put("/im/index/**", "anon");//认证
+
+        //网盘排除
+        filterChainDefinitionMap.put("/nd/ndStorage/preview", "anon");//文件预览图
+        filterChainDefinitionMap.put("/nd/ndStorage/downloadfile", "anon");//文件下载
+
         //性能监控——安全隐患泄露TOEKN（durid连接池也有）
         //filterChainDefinitionMap.put("/actuator/**", "anon");
         //测试模块排除
