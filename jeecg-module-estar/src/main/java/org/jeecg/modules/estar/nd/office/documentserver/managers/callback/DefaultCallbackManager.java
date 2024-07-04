@@ -72,8 +72,12 @@ public class DefaultCallbackManager implements CallbackManager {
 
     // save file information from the URL to the file specified
     private void downloadToFile(String url, Path path) throws Exception {
-        if (url == null || url.isEmpty()) throw new RuntimeException("Url argument is not specified");  // URL isn't specified
-        if (path == null) throw new RuntimeException("Path argument is not specified");  // file isn't specified
+        if (url == null || url.isEmpty()) {
+            throw new RuntimeException("Url argument is not specified");  // URL isn't specified
+        }
+        if (path == null) {
+            throw new RuntimeException("Path argument is not specified");  // file isn't specified
+        }
 
         URL uri = new URL(url);
         java.net.HttpURLConnection connection = (java.net.HttpURLConnection) uri.openConnection();
@@ -87,6 +91,7 @@ public class DefaultCallbackManager implements CallbackManager {
         storageMutator.createOrUpdateFile(path, stream);  // update a file or create a new one
     }
 
+    @Override
     @SneakyThrows
     public void processSave(Track body, String fileName) {  // file saving process
         String downloadUri = body.getUrl();
@@ -98,7 +103,9 @@ public class DefaultCallbackManager implements CallbackManager {
         String downloadExt = "." + body.getFiletype(); // get an extension of the downloaded file
 
         // Todo [Delete in version 7.0 or higher]
-        if (downloadExt != "." + null) downloadExt = fileUtility.getFileExtension(downloadUri); // Support for versions below 7.0
+        if (downloadExt != "." + null) {
+            downloadExt = fileUtility.getFileExtension(downloadUri); // Support for versions below 7.0
+        }
 
         //TODO: Refactoring
         if (!curExt.equals(downloadExt)) {  // convert downloaded file to the file with the current extension if these extensions aren't equal
@@ -153,6 +160,7 @@ public class DefaultCallbackManager implements CallbackManager {
     }
 
     //TODO: Replace (String method) with (Enum method)
+    @Override
     @SneakyThrows
     public void commandRequest(String method, String key, HashMap meta) {  // create a command request
         String DocumentCommandUrl = docserviceUrlSite + docserviceUrlCommand;
@@ -183,7 +191,9 @@ public class DefaultCallbackManager implements CallbackManager {
 
         InputStream stream = connection.getInputStream();  // get input stream
 
-        if (stream == null) throw new RuntimeException("Could not get an answer");
+        if (stream == null) {
+            throw new RuntimeException("Could not get an answer");
+        }
 
         String jsonString = serviceConverter.convertStreamToString(stream);  // convert stream to json string
         connection.disconnect();
@@ -202,6 +212,7 @@ public class DefaultCallbackManager implements CallbackManager {
         }
     }
 
+    @Override
     @SneakyThrows
     public void processForceSave(Track body, String fileName) {  // file force saving process
 
@@ -211,7 +222,9 @@ public class DefaultCallbackManager implements CallbackManager {
         String downloadExt = "."+body.getFiletype();  // get an extension of the downloaded file
 
         // Todo [Delete in version 7.0 or higher]
-        if (downloadExt != "."+null) downloadExt = fileUtility.getFileExtension(downloadUri);    // Support for versions below 7.0
+        if (downloadExt != "."+null) {
+            downloadExt = fileUtility.getFileExtension(downloadUri);    // Support for versions below 7.0
+        }
         
         Boolean newFileName = false;
 

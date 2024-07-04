@@ -94,35 +94,35 @@
 		<module>jeecg-module-estar</module>
     </modules>
 
-	<repositories>
-		<repository>
-            <id>aliyun</id>
-            <name>aliyun Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
-            <snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-        </repository>
-		<repository>
-            <id>jeecg</id>
-            <name>jeecg Repository</name>
-            <url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>
-            <snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<repository>
-			<id>jeecg-snapshots</id>
-			<name>jeecg-snapshots Repository</name>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-			<releases>
-				<enabled>false</enabled>
-			</releases>
-			<snapshots>
-				<enabled>true</enabled>
-			</snapshots>
-		</repository>
-	</repositories>
+<!--	<repositories>-->
+<!--		<repository>-->
+<!--            <id>aliyun</id>-->
+<!--            <name>aliyun Repository</name>-->
+<!--            <url>https://maven.aliyun.com/repository/public</url>-->
+<!--            <snapshots>-->
+<!--				<enabled>false</enabled>-->
+<!--			</snapshots>-->
+<!--        </repository>-->
+<!--		<repository>-->
+<!--            <id>jeecg</id>-->
+<!--            <name>jeecg Repository</name>-->
+<!--            <url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>-->
+<!--            <snapshots>-->
+<!--				<enabled>false</enabled>-->
+<!--			</snapshots>-->
+<!--		</repository>-->
+<!--		<repository>-->
+<!--			<id>jeecg-snapshots</id>-->
+<!--			<name>jeecg-snapshots Repository</name>-->
+<!--			<url>https://oss.sonatype.org/content/repositories/snapshots</url>-->
+<!--			<releases>-->
+<!--				<enabled>false</enabled>-->
+<!--			</releases>-->
+<!--			<snapshots>-->
+<!--				<enabled>true</enabled>-->
+<!--			</snapshots>-->
+<!--		</repository>-->
+<!--	</repositories>-->
 
 	<dependencies>
 		<dependency>
@@ -505,6 +505,24 @@
 			<url>http://maven.jeecg.com:8090/nexus/content/repositories/snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
+	<repositories>
+		<repository>
+			<id>aliyun</id>
+			<name>aliyun Repository</name>
+			<url>https://maven.aliyun.com/repository/public</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>jeecg</id>
+			<name>jeecg Repository</name>
+			<url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 	
     <!-- 环境 -->
     <profiles>

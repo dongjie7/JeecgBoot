@@ -21,8 +21,9 @@ public class RestTemplateConfig {
         return new RestTemplate(factory);
     }
 
-    @Primary
+
     @Bean
+    @Primary
     public ClientHttpRequestFactory simpleClientHttpRequestFactory() {
         SimpleClientHttpRequestFactory factory = new SimpleClientHttpRequestFactory();
         //ms毫秒
