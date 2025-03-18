@@ -897,9 +897,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 	public Result<JSONObject>  setLoginTenant(SysUser sysUser, JSONObject obj, String username, Result<JSONObject> result){
 		// update-begin--Author:sunjianlei Date:20210802 for：获取用户租户信息
 		//用户有哪些租户
-//		List<SysTenant> tenantList = null;
-        //update-begin---author:wangshuai ---date:20221223  for：[QQYUN-3371]租户逻辑改造，改成关系表------------
-		//update-begin---author:wangshuai ---date:20230427  for：【QQYUN-5270】名下租户全部退出后，再次登录出现租户冻结------------
 		List<SysTenant> tenantList = relationMapper.getTenantNoCancel(sysUser.getId());
 		obj.put("tenantList", tenantList);
 		//update-end---author:wangshuai ---date:20230427  for：【QQYUN-5270】名下租户全部退出后，再次登录出现租户冻结------------

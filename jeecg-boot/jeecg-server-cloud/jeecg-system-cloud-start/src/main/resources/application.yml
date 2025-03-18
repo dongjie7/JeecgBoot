@@ -1,23 +1,27 @@
 server:
   port: 7001
-  
+
 spring:
   application:
     name: jeecg-system
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
   cloud:
     nacos:
+      server-addr: @config.server-addr@
+      username: @config.username@
+      password: @config.password@
       config:
-        server-addr: @config.server-addr@
+        enabled: true
         group: @config.group@
         namespace: @config.namespace@
-        username: @config.username@
-        password: @config.password@
+        file-extension: yaml
       discovery:
-        server-addr: ${spring.cloud.nacos.config.server-addr}
+        enabled: true
         group: @config.group@
         namespace: @config.namespace@
-        username: @config.username@
-        password: @config.password@
   config:
     import:
       - optional:nacos:jeecg.yaml
