@@ -28,6 +28,7 @@
 		<dependency>
 			<groupId>org.jeecgframework</groupId>
 			<artifactId>jeewx-api</artifactId>
+			<version>1.5.2</version>
 		</dependency>
 		<!-- 积木报表 -->
 		<dependency>
