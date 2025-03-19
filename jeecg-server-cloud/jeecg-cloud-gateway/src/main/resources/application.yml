@@ -18,7 +18,7 @@ spring:
         username: @config.username@
         password: @config.password@
       discovery:
-        server-addr: ${spring.cloud.nacos.config.server-addr}
+        server-addr: @config.server-addr@
         group: @config.group@
         namespace: @config.namespace@
         username: @config.username@

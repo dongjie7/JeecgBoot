@@ -172,7 +172,7 @@ spring:
           slow-sql-millis: 5000
       datasource:
         master:
-          url: jdbc:mysql://127.0.0.1:3306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+          url: jdbc:mysql://192.168.117.132:3306/jeecg-boot?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
           username: root
           password: root
           driver-class-name: com.mysql.cj.jdbc.Driver
@@ -185,7 +185,7 @@ spring:
   #redis 配置
   redis:
     database: 0
-    host: 127.0.0.1
+    host: 192.168.117.132
     lettuce:
       pool:
         max-active: 8   #最大连接数据库连接数,设 -1 为没有限制
@@ -285,7 +285,7 @@ jeecg:
   # ElasticSearch 6设置
   elasticsearch:
     cluster-name: jeecg-ES
-    cluster-nodes: 127.0.0.1:9200
+    cluster-nodes: 192.168.117.132:9200
     check-enabled: false
   # 表单设计器配置
   desform:
@@ -329,10 +329,10 @@ jeecg:
   #xxl-job配置
   xxljob:
     enabled: false
-    adminAddresses: http://127.0.0.1:9080/xxl-job-admin
+    adminAddresses: http://192.168.117.132:9080/xxl-job-admin
     appname: ${spring.application.name}
     accessToken: ''
-    address: 127.0.0.1:30007
+    address: 192.168.117.132:30007
     ip: 127.0.0.1
     port: 30007
     logPath: logs/jeecg/job/jobhandler/
@@ -345,7 +345,7 @@ jeecg:
       data-type: database
   #分布式锁配置
   redisson:
-    address: 127.0.0.1:6379
+    address: 192.168.117.132:6379
     password:
     type: STANDALONE
     enabled: true

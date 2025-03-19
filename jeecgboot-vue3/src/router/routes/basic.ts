@@ -12,7 +12,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
     hideBreadcrumb: true,
     hideMenu: true,
   },
-  children: [
+  /*children: [
     {
       path: '/:path(.*)*',
       name: PAGE_NOT_FOUND_NAME,
@@ -23,7 +23,7 @@ export const PAGE_NOT_FOUND_ROUTE: AppRouteRecordRaw = {
         hideMenu: true,
       },
     },
-  ],
+  ],*/
 };
 
 export const REDIRECT_ROUTE: AppRouteRecordRaw = {
