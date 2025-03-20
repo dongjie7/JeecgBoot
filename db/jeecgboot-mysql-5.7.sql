@@ -9250,7 +9250,7 @@ INSERT INTO `v3_hello_copy` VALUES ('1549304583296790529', 'admin', '2022-07-19 
 -- Procedure structure for insert_200_records
 -- ----------------------------
 DROP PROCEDURE IF EXISTS `insert_200_records`;
-delimiter ;;
+delimiter //
 CREATE PROCEDURE `insert_200_records`()
 BEGIN
     DECLARE i INT DEFAULT 1;
@@ -9261,8 +9261,7 @@ BEGIN
         
         SET i = i + 1;
     END WHILE;
-END
-;;
+END //
 delimiter ;
 
 SET FOREIGN_KEY_CHECKS = 1;
