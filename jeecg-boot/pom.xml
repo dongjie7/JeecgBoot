@@ -84,6 +84,7 @@
         <module>jeecg-boot-base-core</module>
         <module>jeecg-module-demo</module>
         <module>jeecg-module-system</module>
+		<module>jeecg-server-cloud</module>
     </modules>
 
 	<repositories>
@@ -590,12 +591,12 @@
             </properties>
         </profile>
 		<!-- SpringCloud运行环境 -->
-		<profile>
+		<!--<profile>
 			<id>SpringCloud</id>
 			<modules>
-				<!-- 微服务模块 -->
+				&lt;!&ndash; 微服务模块 &ndash;&gt;
 				<module>jeecg-server-cloud</module>
 			</modules>
-		</profile>
+		</profile>-->
     </profiles>
 </project>
