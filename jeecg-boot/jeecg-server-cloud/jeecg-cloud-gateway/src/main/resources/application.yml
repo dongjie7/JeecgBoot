@@ -37,6 +37,7 @@ spring:
       discovery:
         locator:
           enabled: true
+          #lower-case-service-id: true  # 小写服务ID
       globalcors:
         cors-configurations:
           '[/**]':
@@ -48,13 +49,14 @@ spring:
     #Sentinel配置
     sentinel:
       transport:
-        dashboard: jeecg-boot-sentinel:9000
+        dashboard: 192.168.117.132:8858 # Sentinel 控制台地址
+        port: 8719 # 客户端端口（需与控制台通信）
       # 支持链路限流
       web-context-unify: false
       filter:
         enabled: false
       # 取消Sentinel控制台懒加载
-      eager: false
+      eager: true
       datasource:
         #流控规则
         flow:  # 指定数据源名称
